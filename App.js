@@ -1,8 +1,17 @@
-import React, { useState } from 'react'
-import { TextInput } from 'react-native'
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
 
-import ListingEditScreen from './app/screens/ListingEditScreen'
+import navigationTheme from './app/navigation/navigationTheme'
+import AppNavigator from './app/navigation/AppNavigator'
+// import AuthNavigator from './app/navigation/AuthNavigator'
+import Screen from './app/components/Screen'
 
 export default function App() {
-  return <ListingEditScreen />
+  return (
+    <Screen>
+      <NavigationContainer theme={navigationTheme}>
+        <AppNavigator />
+      </NavigationContainer>
+    </Screen>
+  )
 }
