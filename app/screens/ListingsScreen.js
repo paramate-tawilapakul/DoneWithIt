@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet } from 'react-native'
 
 import ActivityIndicator from '../components/ActivityIndicator'
@@ -19,33 +19,43 @@ function ListingsScreen({ navigation }) {
   }, [])
 
   return (
-    <Screen style={styles.screen}>
-      {getListingsApi.error && (
-        <>
-          <AppText>Couldn't retrieve the listings.</AppText>
-          <Button title='Retry' onPress={getListingsApi.request} />
-        </>
-      )}
+    <>
       <ActivityIndicator visible={getListingsApi.loading} />
-      <FlatList
-        data={getListingsApi.data}
-        keyExtractor={listing => listing.id.toString()}
-        renderItem={({ item }) => (
-          <Card
-            title={item.title}
-            subTitle={'$' + item.price}
-            imageUrl={item.images[0].url}
-            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
-          />
+      <Screen style={styles.screen}>
+        {getListingsApi.error && (
+          <>
+            <AppText>Couldn't retrieve the listings.</AppText>
+            <Button title='Retry' onPress={getListingsApi.request} />
+          </>
         )}
-      />
-    </Screen>
+
+        {/* {!getListingsApi.loading && ( */}
+        <FlatList
+          data={getListingsApi.data}
+          keyExtractor={listing => listing.id.toString()}
+          renderItem={({ item }) => (
+            <Card
+              title={item.title}
+              subTitle={'$' + item.price}
+              imageUrl={item.images[0].url}
+              onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+              thumbnailUrl={item.images[0].thumbnailUrl}
+            />
+          )}
+          refreshing={false}
+          onRefresh={() => {
+            getListingsApi.request()
+          }}
+        />
+        {/* )} */}
+      </Screen>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 20,
+    padding: 10,
     backgroundColor: colors.light,
   },
 })
