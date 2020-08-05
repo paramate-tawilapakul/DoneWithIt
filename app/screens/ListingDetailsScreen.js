@@ -1,17 +1,24 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+} from 'react-native'
 import { Image } from 'react-native-expo-image-cache'
 
 import colors from '../config/colors'
 import ListItem from '../components/lists/ListItem'
 import Text from '../components/Text'
 import Screen from '../components/Screen'
+import ContactSellerForm from '../components/ContactSellerForm'
 
 function ListingDetailsScreen({ route }) {
   const listing = route.params
   return (
-    <Screen>
-      <View>
+    <ScrollView>
+      <Screen>
         <Image
           style={styles.image}
           tint='light'
@@ -28,9 +35,10 @@ function ListingDetailsScreen({ route }) {
               subTitle='5 Listings'
             />
           </View>
+          <ContactSellerForm listing={listing} />
         </View>
-      </View>
-    </Screen>
+      </Screen>
+    </ScrollView>
   )
 }
 

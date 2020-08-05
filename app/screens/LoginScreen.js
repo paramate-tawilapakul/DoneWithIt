@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Image } from 'react-native'
+import { StyleSheet, Image, ScrollView } from 'react-native'
 import * as Yup from 'yup'
 
 import Screen from '../components/Screen'
@@ -29,8 +29,8 @@ function LoginScreen(props) {
   }
 
   return (
-    <>
-      <Screen style={styles.container}>
+    <Screen style={styles.container}>
+      <ScrollView>
         <Image style={styles.logo} source={require('../assets/logo-red.png')} />
 
         <Form
@@ -62,8 +62,8 @@ function LoginScreen(props) {
           />
           <SubmitButton title='Login' />
         </Form>
-      </Screen>
-    </>
+      </ScrollView>
+    </Screen>
   )
 }
 

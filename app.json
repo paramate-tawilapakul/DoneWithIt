@@ -2,10 +2,16 @@
   "expo": {
     "name": "DoneWithIt",
     "slug": "DoneWithIt",
-    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
+    "owner": "paramate",
+    "notification": {
+      "iosDisplayInForeground": true
+    },
+    "android": {
+      "useNextNotificationsApi": true
+    },
     "splash": {
       "image": "./app/assets/splash.png",
       "resizeMode": "cover",
